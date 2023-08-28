@@ -25,17 +25,9 @@ describe("Aggregator Tests", function () {
       cid =
         "0x0181e2039220203f46bc645b07a3ea2c04f066f939ddf7e269dd77671f9e1e61a3a3797e665127";
       const address = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
-      await expect(
-        this.aggregator.submit(
-          cid,
-          "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-          0,
-          0,
-          0
-        )
-      )
+      await expect(this.aggregator.submit(cid))
         .to.emit(this.aggregator, "SubmitAggregatorRequest")
-        .withArgs(1, cid, address, address.toLowerCase(), 0, 0, 0);
+        .withArgs(1, cid, address);
     });
 
     it("Should submit a callback with the expected Aux Data", async function () {
