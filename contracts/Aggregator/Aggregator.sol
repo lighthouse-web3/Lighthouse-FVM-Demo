@@ -26,12 +26,6 @@ contract Aggregator is IAggregatorOracle, Proof {
   mapping(uint256 => bytes) public txIdToFile;
   // previosly this was  ----> mapping(uint256 => fileDetails) public fileIdDetail;
 
-  /**
-   * @notice mapping to store transaction ID against deal Id
-   * @dev transaction ID -> deal ID
-   */
-  mapping(uint => dealDetails) public txIdToDealDetails;
-
   /// @notice Struct to store all the details about stored file
   struct dealDetails {
     uint dealId;
@@ -92,22 +86,6 @@ contract Aggregator is IAggregatorOracle, Proof {
     // Perform validation logic
     // return this.computeExpectedAuxDataWithDeal(_dealId, _proof, _verifierData);
     return this.computeExpectedAuxData(_proof, _verifierData);
-  }
-
-  /**
-   * @notice function to store file ID against deal Id
-   * @param _transactionId unique id of file
-   * @param _dealId deal id
-   * @param _cid of the file
-   * @dev called by the lighthouse aggregator backend
-   */
-  function setDealDetails(
-    uint _transactionId,
-    uint _dealId,
-    bytes memory _cid
-  ) external {
-    txIdToDealDetails[_transactionId].dealId = _dealId;
-    txIdToDealDetails[_transactionId].cid = _cid;
   }
 
   //////////           GETTER FUNCTIONS          ///////////////
@@ -179,19 +157,5 @@ contract Aggregator is IAggregatorOracle, Proof {
     }
 
     return expiringDealIds;
-  }
-
-  /**
-   * @notice function to get the Deal id and CID from file id
-   * @param _transactionId unique id of file
-   * @dev called by the user
-   */
-  function getDealDetails(
-    uint _transactionId
-  ) external view returns (bytes memory, uint) {
-    return (
-      txIdToDealDetails[_transactionId].cid,
-      txIdToDealDetails[_transactionId].dealId
-    );
   }
 }

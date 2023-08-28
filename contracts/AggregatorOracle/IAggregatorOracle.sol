@@ -17,7 +17,7 @@ interface IAggregatorOracle {
 
   // Submit Aggregator Request Event
   event SubmitAggregatorRequest(
-    uint256 indexed transactionId,
+    uint256 indexed id,
     bytes fileLink,
     address userAddress
   );
@@ -50,19 +50,6 @@ interface IAggregatorOracle {
   ) external returns (InclusionAuxData memory);
 
   /**
-   * @notice function to store file ID against deal Id
-   * @param _transactionId unique id of file
-   * @param _dealId deal id
-   * @param _cid of the file
-   * @dev called by the lighthouse aggregator backend
-   */
-  function setDealDetails(
-    uint _transactionId,
-    uint _dealId,
-    bytes memory _cid
-  ) external;
-
-  /**
    * @dev getAllDeals returns all deals for a given cid
    * @param _cid is the cid of the data segment
    * @return the deal IDs
@@ -86,13 +73,4 @@ interface IAggregatorOracle {
     bytes memory _cid,
     uint64 epochs
   ) external returns (Deal[] memory);
-
-  /**
-   * @notice function to get the Deal id and CID from file id
-   * @param _transactionId unique id of file
-   * @dev called by the user
-   */
-  function getDealDetails(
-    uint _transactionId
-  ) external view returns (bytes memory, uint);
 }
