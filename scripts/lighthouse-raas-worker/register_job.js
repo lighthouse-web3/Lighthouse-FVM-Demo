@@ -2,7 +2,9 @@ const axios = require('axios')
 
 const register_job = async() =>{
     const formData = new FormData();
+    
     const cid = "QmTgLAp2Ze2bv7WV2wnZrvtpR5pKJxZ2vtBxZPwr7rM61a"
+    // Optional Parameters
     const requestReceivedTime = new Date()
     const endDate = requestReceivedTime.setMonth(requestReceivedTime.getMonth() + 1)
     const replicationTarget = 2
