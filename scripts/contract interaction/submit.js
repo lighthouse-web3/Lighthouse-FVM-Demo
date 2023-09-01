@@ -1,8 +1,8 @@
 require("dotenv").config()
-import { ethers } from "ethers"
-import dealStatusABI from "../abi/dealStatusABI"
+const { ethers } = require("ethers")
+const dealStatusABI = require("../abi/dealStatusABI")
 
-const submit = async () => {
+const submit = async (cid) => {
   // Signer
   const provider = new ethers.providers.JsonRpcProvider("https://api.calibration.node.glif.io/rpc/v1")
   const privateKey = process.env.PRIVATE_KEY
@@ -13,10 +13,9 @@ const submit = async () => {
   const contract = new ethers.Contract(contractAddress, dealStatusABI, signer)
 
   // Call submit
-  const cid = "QmPb9ghtNywrmK3KbqnQFNJmijNk1sbjhZa37LZg4wgPKy"
   const cidHex = ethers.utils.hexlify(ethers.utils.toUtf8Bytes(cid))
   const submit = await contract.submit(cidHex, {
-    gasLimit: 50_000_000,
+    gasLimit: 500_000_000,
   })
 
   const response = await submit.wait()
@@ -25,4 +24,4 @@ const submit = async () => {
   console.log('CID', ethers.utils.toUtf8String(eventData[1]))
 };
 
-submit()
+submit("QmTgLAp2Ze2bv7WV2wnZrvtpR5pKJxZ2vtBxZPwr7rM61a")
