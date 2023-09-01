@@ -1,6 +1,6 @@
 require("dotenv").config()
 const { ethers } = require("ethers")
-const dealStatusAbi = require("../abi/dealStatusAbi")
+const dealStatusAbi = require("../../abi/dealStatusAbi")
 
 const callFileDetails = async (cid) => {
   // Provider

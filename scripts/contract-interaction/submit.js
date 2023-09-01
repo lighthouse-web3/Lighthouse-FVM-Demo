@@ -1,6 +1,6 @@
 require("dotenv").config()
 const { ethers } = require("ethers")
-const dealStatusABI = require("../abi/dealStatusABI")
+const dealStatusAbi = require("../../abi/dealStatusAbi")
 
 const submit = async (cid) => {
   // Signer
@@ -10,7 +10,7 @@ const submit = async (cid) => {
 
   // Contract
   const contractAddress = "0x6ec8722e6543fB5976a547434c8644b51e24785b"
-  const contract = new ethers.Contract(contractAddress, dealStatusABI, signer)
+  const contract = new ethers.Contract(contractAddress, dealStatusAbi, signer)
 
   // Call submit
   const cidHex = ethers.utils.hexlify(ethers.utils.toUtf8Bytes(cid))
@@ -24,4 +24,4 @@ const submit = async (cid) => {
   console.log('CID', ethers.utils.toUtf8String(eventData[1]))
 };
 
-submit("QmTgLAp2Ze2bv7WV2wnZrvtpR5pKJxZ2vtBxZPwr7rM61a")
+submit("QmNvjxaqpRiX7o2U5MQA8DZcz7T1dctjan3ZPH2sF5Hy9i")
