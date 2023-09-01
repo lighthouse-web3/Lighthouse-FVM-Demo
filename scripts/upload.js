@@ -4,7 +4,7 @@ const lighthouse = require('@lighthouse-web3/sdk')
 const uploadFile = async() =>{
   const path = "C:/Users/ravis/Desktop/filecoin code ex/raas-code-examples/testFile/adamsfamily.jpg"; // Give path to the file
   
-  const apiKey = process.env.PRIVATE_KEY; //generate from https://files.lighthouse.storage/ or cli (lighthouse-web3 api-key --new)
+  const apiKey = process.env.LIGHTHOUSE_API_KEY; //generate from https://files.lighthouse.storage/ or cli (lighthouse-web3 api-key --new)
   const dealParam = {
     "num_copies": 1, // max 3
     "repair_threshold": null, // default 10 days
